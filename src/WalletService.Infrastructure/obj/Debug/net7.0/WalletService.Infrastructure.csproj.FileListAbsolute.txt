@@ -1,0 +1,15 @@
+/home/leo/dev/WalletService/src/WalletService.Infrastructure/bin/Debug/net7.0/WalletService.Infrastructure.deps.json
+/home/leo/dev/WalletService/src/WalletService.Infrastructure/bin/Debug/net7.0/WalletService.Infrastructure.dll
+/home/leo/dev/WalletService/src/WalletService.Infrastructure/bin/Debug/net7.0/WalletService.Infrastructure.pdb
+/home/leo/dev/WalletService/src/WalletService.Infrastructure/bin/Debug/net7.0/WalletService.Application.dll
+/home/leo/dev/WalletService/src/WalletService.Infrastructure/bin/Debug/net7.0/WalletService.Application.pdb
+/home/leo/dev/WalletService/src/WalletService.Infrastructure/obj/Debug/net7.0/WalletService.Infrastructure.csproj.AssemblyReference.cache
+/home/leo/dev/WalletService/src/WalletService.Infrastructure/obj/Debug/net7.0/WalletService.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+/home/leo/dev/WalletService/src/WalletService.Infrastructure/obj/Debug/net7.0/WalletService.Infrastructure.AssemblyInfoInputs.cache
+/home/leo/dev/WalletService/src/WalletService.Infrastructure/obj/Debug/net7.0/WalletService.Infrastructure.AssemblyInfo.cs
+/home/leo/dev/WalletService/src/WalletService.Infrastructure/obj/Debug/net7.0/WalletService.Infrastructure.csproj.CoreCompileInputs.cache
+/home/leo/dev/WalletService/src/WalletService.Infrastructure/obj/Debug/net7.0/WalletService.Infrastructure.csproj.CopyComplete
+/home/leo/dev/WalletService/src/WalletService.Infrastructure/obj/Debug/net7.0/WalletService.Infrastructure.dll
+/home/leo/dev/WalletService/src/WalletService.Infrastructure/obj/Debug/net7.0/refint/WalletService.Infrastructure.dll
+/home/leo/dev/WalletService/src/WalletService.Infrastructure/obj/Debug/net7.0/WalletService.Infrastructure.pdb
+/home/leo/dev/WalletService/src/WalletService.Infrastructure/obj/Debug/net7.0/ref/WalletService.Infrastructure.dll
