@@ -2,6 +2,8 @@ using System.Data.SqlClient;
 using Dapper;
 using WalletService.Application.Abstractions;
 using WalletService.Application.Models;
+using WalletService.Application.Wallet.Queries;
+using WalletService.Application.Wallets.Commands;
 using WalletService.Infrastructure.Entities;
 using WalletService.Infrastructure.utils;
 
@@ -16,33 +18,34 @@ public class WalletRepository : IWalletRepository
         this.connectionString = connectionString;
     }
 
-    public async ValueTask AddWalletAsync(Wallet wallet, string userId)
+    public async ValueTask AddWalletAsync(CreateWalletCommand createWalletCommand)
     {
         var entity = new WalletEntity(
-            wallet.Id,
-            wallet.Name,
-            wallet.Currency,
-            wallet.CreatedAt,
-            wallet.Balance,
-            userId);
+            "id",
+            "wallet",
+            "USD",
+            DateTime.UtcNow.ToUniversalTime().ToString(),
+            0.0,
+            "userId");
 
-        string sqlStatement = """
-            INSERT INTO wallets (id, name, currency, createdAt, balance, userId)
-            VALUES (@Id, @Name, @Currency, @CreatedAt, @Balance, @UserId)
-        """;
+        string sqlStatement =
+"""
+INSERT INTO wallets (id, name, currency, createdAt, balance, userId)
+VALUES (@Id, @Name, @Currency, @CreatedAt, @Balance, @UserId)
+""";
 
         using var connection = new SqlConnection(connectionString);
         await connection.ExecuteAsync(sqlStatement, entity);
     }
 
-    public async ValueTask<Wallet> GetWalletAsync(string userId, string walletId)
+    public async ValueTask<Wallet> GetWalletAsync(GetWalletQuery getWalletQuery)
     {
         string sqlStatement = SqlStatements.GetSelectWalletSqlStatement();
 
         using var connection = new SqlConnection(connectionString);
 
         var walletEntity = await connection
-            .QuerySingleOrDefaultAsync<WalletEntity>(sqlStatement, new { walletId, userId });
+            .QuerySingleOrDefaultAsync<WalletEntity>(sqlStatement, getWalletQuery);
 
         return new Wallet(
             walletEntity.Id,
@@ -53,7 +56,7 @@ public class WalletRepository : IWalletRepository
         );
     }
 
-    public async ValueTask<IEnumerable<Wallet>> GetWalletsAsync(string userId, int pageNumber, int pageSize)
+    public async ValueTask<IEnumerable<Wallet>> GetWalletsAsync(GetWalletsQuery getWalletsQuery)
     {
         string sqlStatement =
 """
@@ -65,24 +68,20 @@ FETCH NEXT @pageSize ROWS ONLY;
 """;
 
         using var connection = new SqlConnection(connectionString);
-
-        return await connection.QueryAsync<Wallet>(
-                sqlStatement, new { userId, pageNumber, pageSize });
+        return await connection.QueryAsync<Wallet>(sqlStatement, getWalletsQuery);
     }
 
-    public async ValueTask UpdateWalletBalanceAsync(string userId, string walletId, string operation, double amount)
+    public async ValueTask UpdateWalletBalanceAsync(UpdateWalletBalanceCommand updateWalletBalanceCommand)
     {
         throw new NotImplementedException();
     }
 
     public async ValueTask InitDBAsync()
     {
-        string script = File.ReadAllText("OBSER");
-
         using var connection = new SqlConnection(connectionString);
         connection.Open();
 
-        var command = new SqlCommand(script, connection);
+        var command = new SqlCommand("", connection);
         command.ExecuteNonQuery();
     }
 }

@@ -4,7 +4,7 @@ using WalletService.Application.Wallet.Queries;
 
 namespace WalletService.Application.Wallet.Handlers;
 
-public class GetWalletsQueryHandler : IRequestHandler<GetWalletsQuery, List<Models.Wallet>>
+public class GetWalletsQueryHandler : IRequestHandler<GetWalletsQuery, IEnumerable<Models.Wallet>>
 {
     private readonly IWalletRepository walletRepository;
 
@@ -13,8 +13,6 @@ public class GetWalletsQueryHandler : IRequestHandler<GetWalletsQuery, List<Mode
         this.walletRepository = walletRepository;
     }
 
-    public async Task<List<Models.Wallet>> Handle(GetWalletsQuery request, CancellationToken cancellationToken)
-    {
-        throw new NotImplementedException();
-    }
+    public async Task<IEnumerable<Models.Wallet>> Handle(GetWalletsQuery request, CancellationToken cancellationToken) =>
+        await walletRepository.GetWalletsAsync(request);
 }

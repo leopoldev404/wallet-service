@@ -23,7 +23,7 @@ public class CreateWalletCommandHandler : IRequestHandler<CreateWalletCommand, M
             0
         );
 
-        await walletRepository.AddWalletAsync(wallet, request.UserId);
+        await walletRepository.AddWalletAsync(request);
         return wallet;
     }
 }

@@ -1,3 +1,4 @@
+using System.Reflection;
 using MediatR;
 using Serilog;
 using WalletService.Application.Abstractions;
@@ -8,16 +9,23 @@ namespace WalletService.Api;
 
 public static class Extensions
 {
-    public static void AddApplication(this WebApplicationBuilder builder)
+
+    public static WebApplicationBuilder AddApplication(this WebApplicationBuilder builder)
     {
         builder.Services.AddMediatR(cfg =>
-            cfg.RegisterServicesFromAssemblyContaining<Program>());
+            cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
+
+        return builder;
     }
 
-    public static void AddInfrastructure(this WebApplicationBuilder builder)
+    public static WebApplicationBuilder AddInfrastructure(this WebApplicationBuilder builder)
     {
+        builder.Services.AddSingleton<IUserService, UserService>();
+
         builder.Services.AddHttpClient<IUserService, UserService>("userServiceClient", client =>
             client.BaseAddress = new Uri(builder.Configuration["Microservices:User"] ?? ""));
+
+        return builder;
     }
 
     public static async Task InitDBAsync(this WebApplicationBuilder builder)

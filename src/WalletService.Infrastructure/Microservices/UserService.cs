@@ -5,17 +5,15 @@ namespace WalletService.Infrastructure.Microservices;
 
 public class UserService : IUserService
 {
-    private readonly IHttpClientFactory httpClientFactory;
+    private readonly HttpClient userServiceClient;
 
-    public UserService(IHttpClientFactory httpClientFactory)
+    public UserService(HttpClient userServiceClient)
     {
-        this.httpClientFactory = httpClientFactory;
+        this.userServiceClient = userServiceClient;
     }
 
     public async ValueTask<bool> ValidateUserAsync(GetUserQuery getUserQuery)
     {
-        var userServiceClient = httpClientFactory.CreateClient("userServiceClient");
-
         // add authorization token to call custom user microservice and authenticate it
         // userServiceClient.DefaultRequestHeaders.Add("Authorization", getUserQuery.Token);
 

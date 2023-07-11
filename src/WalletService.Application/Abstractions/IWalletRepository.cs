@@ -1,12 +1,14 @@
 using WalletService.Application.Models;
+using WalletService.Application.Wallet.Queries;
+using WalletService.Application.Wallets.Commands;
 
 namespace WalletService.Application.Abstractions;
 
 public interface IWalletRepository
 {
-    ValueTask<Models.Wallet> GetWalletAsync(string userId, string walletId);
-    ValueTask<IEnumerable<Models.Wallet>> GetWalletsAsync(string userId, int pageNumber, int pageSize);
-    ValueTask AddWalletAsync(Models.Wallet wallet, string userId);
-    ValueTask UpdateWalletBalanceAsync(string userId, string walletId, string operation, double amount);
+    ValueTask<Models.Wallet> GetWalletAsync(GetWalletQuery getWalletQuery);
+    ValueTask<IEnumerable<Models.Wallet>> GetWalletsAsync(GetWalletsQuery getWalletsQuery);
+    ValueTask AddWalletAsync(CreateWalletCommand createWalletCommand);
+    ValueTask UpdateWalletBalanceAsync(UpdateWalletBalanceCommand updateWalletBalanceCommand);
     ValueTask InitDBAsync();
 }

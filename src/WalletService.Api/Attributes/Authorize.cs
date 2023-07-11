@@ -1,5 +1,6 @@
 using System.Text.Json.Nodes;
 using MediatR;
+using WalletService.Application.Abstractions;
 using WalletService.Application.User.Queries;
 
 namespace WalletService.Api.Attributes;
@@ -7,11 +8,16 @@ namespace WalletService.Api.Attributes;
 public class Authorize : IEndpointFilter
 {
     private readonly IMediator mediator;
+    private readonly IUserService userService;
     private readonly Application.Logging.ILogger logger;
 
-    public Authorize(IMediator mediator, Application.Logging.ILogger logger)
+    public Authorize(
+        IMediator mediator,
+        IUserService userService,
+        Application.Logging.ILogger logger)
     {
         this.mediator = mediator;
+        this.userService = userService;
         this.logger = logger;
     }
 
@@ -26,7 +32,7 @@ public class Authorize : IEndpointFilter
         string? token = context.HttpContext.Request.Headers["Authorization"];
 
         if (string.IsNullOrEmpty(token) ||
-            !await mediator.Send(new GetUserQuery(userId, token)))
+            !await userService.ValidateUserAsync(new GetUserQuery(userId, token)))
         {
             return Results.Unauthorized();
         }

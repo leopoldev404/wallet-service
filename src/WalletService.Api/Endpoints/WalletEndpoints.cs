@@ -1,5 +1,7 @@
 using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using WalletService.Api.Attributes;
+using WalletService.Application.Wallet.Queries;
 
 namespace LogispinWalletSolution.Api.Endpoints;
 
@@ -14,11 +16,14 @@ public static class WalletEndpoints
     }
 
     public static async ValueTask<IResult> GetWalletsAsync(
-        IMediator mediator,
+        [FromServices] IMediator mediator,
         string userId,
         int pageSize = 10,
         int pageNumber = 1)
     {
-        return Results.Ok("Lol");
+        var getWalletsQuery = new GetWalletsQuery(userId, pageSize, pageNumber);
+        var wallets = await mediator.Send(getWalletsQuery);
+        return Results.Ok(wallets);
+
     }
 }
