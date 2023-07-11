@@ -1,7 +1,7 @@
 using MediatR;
 using Serilog;
 using WalletService.Application.Abstractions;
-using WalletService.Application.Commands;
+using WalletService.Application.Wallets.Commands;
 using WalletService.Infrastructure.Microservices;
 
 namespace WalletService.Api;

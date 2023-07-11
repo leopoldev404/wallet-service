@@ -1,5 +1,4 @@
-using WalletService.Application.Models;
-using WalletService.Application.Queries;
+using WalletService.Application.User.Queries;
 
 namespace WalletService.Application.Abstractions;
 

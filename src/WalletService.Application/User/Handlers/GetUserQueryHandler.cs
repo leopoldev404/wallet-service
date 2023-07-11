@@ -1,8 +1,9 @@
 using MediatR;
 using WalletService.Application.Abstractions;
-using WalletService.Application.Queries;
+using WalletService.Application.User.Queries;
 
-namespace WalletService.Application.handlers;
+namespace WalletService.Application.User.Handlers;
+
 
 public class GetUserQueryHandler : IRequestHandler<GetUserQuery, bool>
 {
@@ -13,8 +14,6 @@ public class GetUserQueryHandler : IRequestHandler<GetUserQuery, bool>
         this.userService = userService;
     }
 
-    public async Task<bool> Handle(GetUserQuery request, CancellationToken cancellationToken)
-    {
-        return await userService.ValidateUserAsync(request);
-    }
+    public async Task<bool> Handle(GetUserQuery request, CancellationToken cancellationToken) =>
+        await userService.ValidateUserAsync(request);
 }

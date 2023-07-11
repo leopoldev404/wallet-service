@@ -1,6 +1,6 @@
 using System.Text.Json.Nodes;
 using MediatR;
-using WalletService.Application.Queries;
+using WalletService.Application.User.Queries;
 
 namespace WalletService.Api.Attributes;
 
@@ -45,6 +45,7 @@ public class Authorize : IEndpointFilter
             var bodyAsText = await new StreamReader(context.HttpContext.Request.Body).ReadToEndAsync();
             var jsonBody = JsonNode.Parse(bodyAsText);
             userId = jsonBody?["userId"]?.ToString();
+            context.HttpContext.Request.Body.Position = 0;
         }
 
         return userId;

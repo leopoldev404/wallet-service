@@ -1,6 +1,5 @@
 using WalletService.Application.Abstractions;
-using WalletService.Application.Models;
-using WalletService.Application.Queries;
+using WalletService.Application.User.Queries;
 
 namespace WalletService.Infrastructure.Microservices;
 
@@ -16,7 +15,9 @@ public class UserService : IUserService
     public async ValueTask<bool> ValidateUserAsync(GetUserQuery getUserQuery)
     {
         var userServiceClient = httpClientFactory.CreateClient("userServiceClient");
-        userServiceClient.DefaultRequestHeaders.Add("Authorization", getUserQuery.Token);
+
+        // add authorization token to call custom user microservice and authenticate it
+        // userServiceClient.DefaultRequestHeaders.Add("Authorization", getUserQuery.Token);
 
         var response = await userServiceClient
             .GetAsync($"{userServiceClient.BaseAddress}/{getUserQuery.UserId}");

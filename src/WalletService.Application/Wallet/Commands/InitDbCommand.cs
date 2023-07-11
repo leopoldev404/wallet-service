@@ -1,5 +1,5 @@
 using MediatR;
 
-namespace WalletService.Application.Commands;
+namespace WalletService.Application.Wallets.Commands;
 
 public record InitDBCommand() : IRequest;

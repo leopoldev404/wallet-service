@@ -1,11 +1,10 @@
 using MediatR;
 using WalletService.Application.Abstractions;
-using WalletService.Application.Commands;
-using WalletService.Application.Models;
+using WalletService.Application.Wallets.Commands;
 
-namespace WalletService.Application.handlers;
+namespace WalletService.Application.Wallet.Handlers;
 
-public class CreateWalletCommandHandler : IRequestHandler<CreateWalletCommand, Wallet>
+public class CreateWalletCommandHandler : IRequestHandler<CreateWalletCommand, Models.Wallet>
 {
     private readonly IWalletRepository walletRepository;
 
@@ -14,9 +13,9 @@ public class CreateWalletCommandHandler : IRequestHandler<CreateWalletCommand, W
         this.walletRepository = walletRepository;
     }
 
-    public async Task<Wallet> Handle(CreateWalletCommand request, CancellationToken cancellationToken)
+    public async Task<Models.Wallet> Handle(CreateWalletCommand request, CancellationToken cancellationToken)
     {
-        var wallet = new Wallet(
+        var wallet = new Models.Wallet(
             Guid.NewGuid().ToString(),
             request.WalletName,
             request.Currency,

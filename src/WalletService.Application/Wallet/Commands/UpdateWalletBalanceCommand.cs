@@ -1,7 +1,6 @@
 using MediatR;
 
-namespace WalletService.Application.Commands;
-
+namespace WalletService.Application.Wallets.Commands;
 
 public record UpdateWalletBalanceCommand(string Operation, double Amount) : IRequest;
 
