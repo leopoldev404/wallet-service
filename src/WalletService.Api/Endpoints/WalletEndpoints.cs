@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using WalletService.Api.Attributes;
 using WalletService.Application.Wallet.Queries;
 
-namespace LogispinWalletSolution.Api.Endpoints;
+namespace WalletService.Api.Endpoints;
 
 public static class WalletEndpoints
 {
@@ -24,6 +24,5 @@ public static class WalletEndpoints
         var getWalletsQuery = new GetWalletsQuery(userId, pageSize, pageNumber);
         var wallets = await mediator.Send(getWalletsQuery);
         return Results.Ok(wallets);
-
     }
 }

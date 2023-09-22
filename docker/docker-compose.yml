@@ -1,0 +1,36 @@
+version: "3.4"
+services:
+  postgres:
+    image: postgres
+    container_name: postgres-container-wallet
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: psw
+      POSTGRES_DB: your_postgres_database
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  mongodb:
+    image: mongo
+    container_name: mongo-container-wallet
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+
+  wallet-service:
+    container_name: wallet-service
+    build:
+      context: ../
+      dockerfile: ./docker/dockerfile
+    ports:
+      - "6000:6000"
+    depends_on:
+      - mongodb
+      - postgres
+
+volumes:
+  postgres_data:
+  mongodb_data:

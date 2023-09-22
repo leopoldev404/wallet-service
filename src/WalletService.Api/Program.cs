@@ -1,5 +1,5 @@
-﻿using LogispinWalletSolution.Api.Endpoints;
-using WalletService.Api;
+﻿using WalletService.Api;
+using WalletService.Api.Endpoints;
 
 var builder = WebApplication.CreateBuilder(args);
 

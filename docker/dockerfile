@@ -1,0 +1,20 @@
+FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
+WORKDIR /app
+
+COPY src/WalletService.Api/WalletService.Api.csproj ./src/WalletService.Api/
+COPY src/WalletService.Application/WalletService.Application.csproj ./src/WalletService.Application/
+COPY src/WalletService.Infrastructure/WalletService.Infrastructure.csproj ./src/WalletService.Infrastructure/
+
+RUN dotnet restore ./src/WalletService.Api/WalletService.Api.csproj
+
+COPY . .
+WORKDIR /app/src/WalletService.Api
+RUN dotnet build -c Release -o /app/build
+
+FROM build AS publish
+RUN dotnet publish -c Release -o /app/publish
+
+FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
+ENTRYPOINT ["dotnet", "WalletService.Api.dll"]

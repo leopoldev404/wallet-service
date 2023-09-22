@@ -1,4 +1,3 @@
-using WalletService.Application.Models;
 using WalletService.Application.Wallet.Queries;
 using WalletService.Application.Wallets.Commands;
 

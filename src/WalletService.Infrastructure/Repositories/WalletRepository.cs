@@ -5,7 +5,6 @@ using WalletService.Application.Models;
 using WalletService.Application.Wallet.Queries;
 using WalletService.Application.Wallets.Commands;
 using WalletService.Infrastructure.Entities;
-using WalletService.Infrastructure.utils;
 
 namespace WalletService.Infrastructure.Repositories;
 
@@ -28,31 +27,27 @@ public class WalletRepository : IWalletRepository
             0.0,
             "userId");
 
-        string sqlStatement =
-"""
-INSERT INTO wallets (id, name, currency, createdAt, balance, userId)
-VALUES (@Id, @Name, @Currency, @CreatedAt, @Balance, @UserId)
-""";
-
         using var connection = new SqlConnection(connectionString);
-        await connection.ExecuteAsync(sqlStatement, entity);
+
+        // await connection
+        //     .ExecuteAsync(SqlStatements.InsertWallet(), entity);
     }
 
     public async ValueTask<Wallet> GetWalletAsync(GetWalletQuery getWalletQuery)
     {
-        string sqlStatement = SqlStatements.GetSelectWalletSqlStatement();
+        // string sqlStatement = SqlStatements.GetSelectWalletSqlStatement();
 
-        using var connection = new SqlConnection(connectionString);
+        // using var connection = new SqlConnection(connectionString);
 
-        var walletEntity = await connection
-            .QuerySingleOrDefaultAsync<WalletEntity>(sqlStatement, getWalletQuery);
+        // var walletEntity = await connection
+        //     .QuerySingleOrDefaultAsync<WalletEntity>(sqlStatement, getWalletQuery);
 
         return new Wallet(
-            walletEntity.Id,
-            walletEntity.Name,
-            walletEntity.Currency,
-            walletEntity.CreatedAt,
-            walletEntity.Balance
+            "id",
+            "leo",
+            "USD",
+            "2323",
+            1110000.23
         );
     }
 

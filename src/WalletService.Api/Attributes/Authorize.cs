@@ -7,16 +7,13 @@ namespace WalletService.Api.Attributes;
 
 public class Authorize : IEndpointFilter
 {
-    private readonly IMediator mediator;
     private readonly IUserService userService;
     private readonly Application.Logging.ILogger logger;
 
     public Authorize(
-        IMediator mediator,
         IUserService userService,
         Application.Logging.ILogger logger)
     {
-        this.mediator = mediator;
         this.userService = userService;
         this.logger = logger;
     }
