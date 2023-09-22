@@ -11,6 +11,6 @@ builder.Services.AddHealthChecks();
 var app = builder.Build();
 
 app.MapWalletEndpoints();
-app.MapHealthChecks("/health");
+app.MapHealthChecks("/healthy");
 
 await app.RunAsync();
