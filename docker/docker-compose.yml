@@ -4,9 +4,9 @@ services:
     image: postgres
     container_name: postgres-container-wallet
     environment:
-      POSTGRES_USER: root
+      POSTGRES_USER: dev
       POSTGRES_PASSWORD: psw
-      POSTGRES_DB: your_postgres_database
+      POSTGRES_DB: wallet-db
     ports:
       - "5432:5432"
     volumes:
@@ -21,7 +21,7 @@ services:
       - mongodb_data:/data/db
 
   wallet-service:
-    container_name: wallet-service
+    container_name: wallet-service-container
     build:
       context: ../
       dockerfile: ./docker/dockerfile

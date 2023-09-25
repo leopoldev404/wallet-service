@@ -1,5 +1,4 @@
 using System.Text.Json.Nodes;
-using MediatR;
 using WalletService.Application.Abstractions;
 using WalletService.Application.User.Queries;
 
