@@ -1,4 +1,3 @@
-version: "3"
 services:
   postgres:
     image: postgres
@@ -17,10 +16,15 @@ services:
   mongodb:
     image: mongo
     container_name: mongo-container
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: dev
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_DATABASE: transactionsdb
     ports:
       - "27017:27017"
     volumes:
       - mongodb_data:/data/db
+      - ./../scripts/init-mongodb.js:/docker-entrypoint-initdb.d/init-mongodb.js
 
   wallet-service:
     container_name: wallet-service-container
