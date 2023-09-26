@@ -13,6 +13,12 @@ CREATE TABLE IF NOT EXISTS users (
     active BOOLEAN DEFAULT TRUE
 );
 
+DELETE FROM users;
+
+INSERT INTO users (username, email, password_hash, first_name, last_name, date_of_birth, created_at, updated_at, active)
+VALUES ('leo', 'leonardo.pol@outlook.com', '5f4dcc3b5aa765d61d8327deb882cf99', 'Leonardo', 'Pol', '1998-09-19', NOW(), NOW(), TRUE);
+
+
 CREATE TABLE IF NOT EXISTS wallets (
     id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
     user_id UUID REFERENCES users(id),
