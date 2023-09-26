@@ -2,19 +2,21 @@ version: "3"
 services:
   postgres:
     image: postgres
-    container_name: postgres-container-wallet
+    restart: always
+    container_name: postgres-container
     environment:
       POSTGRES_USER: dev
-      POSTGRES_PASSWORD: psw
-      POSTGRES_DB: wallet-db
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: finance
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+      - ./../scripts/init-postgres.sql:/docker-entrypoint-initdb.d/init-postgres.sql
 
   mongodb:
     image: mongo
-    container_name: mongo-container-wallet
+    container_name: mongo-container
     ports:
       - "27017:27017"
     volumes:
