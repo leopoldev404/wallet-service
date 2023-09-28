@@ -30,7 +30,7 @@ services:
     container_name: wallet-service-container
     build:
       context: ../
-      dockerfile: ./docker/dockerfile
+      dockerfile: ./docker/wallet-service-dockerfile
     ports:
       - "5000:80"
     environment:
